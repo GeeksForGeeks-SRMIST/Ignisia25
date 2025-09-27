@@ -2,7 +2,7 @@ import React from 'react'
 
 const Timeline = () => {
   return (
-    <div>Timeline</div>
+    <div className='bg-yellow-300'>Timeline</div>
   )
 }
 
