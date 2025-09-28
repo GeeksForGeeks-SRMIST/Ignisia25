@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import IgnisiaLogo from './PhoenixLogo';
 import { HiMenu, HiX } from 'react-icons/hi';
+
+// Import both logos
+import GfgLogo from '../assets/gfg-logo.png';
+import IgnisiaTextLogo from '../assets/geeksforgeeks.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,7 +45,7 @@ const Navbar = () => {
           <div className="flex items-center gap-3 h-16 pl-4 pr-2">
             <a href="#home" aria-label="Homepage">
               <motion.div layout="position">
-                <IgnisiaLogo className="w-7 h-7 text-brand-orange" />
+                <img src={GfgLogo} alt="GeeksForGeeks SRMIST Logo" className="w-11 h-11 object-contain relative top-px" />
               </motion.div>
             </a>
             <motion.div
@@ -50,7 +53,8 @@ const Navbar = () => {
               animate={isScrolled ? 'hidden' : 'visible'}
               className="overflow-hidden"
             >
-              <span className="text-lg font-bold font-pixel text-brand-orange whitespace-nowrap">IGNISIA'25</span>
+              {/* The text span has been replaced with your logo image */}
+              <img src={IgnisiaTextLogo} alt="Ignisia 25 Logo" className="h-[1.5rem]" style={{ imageRendering: 'pixelated' }} />
             </motion.div>
           </div>
 
@@ -62,7 +66,6 @@ const Navbar = () => {
           >
             <div className="w-px h-6 bg-white/10" />
             {navLinks.map((link) => (
-              // UPDATED: Added font-nav, font-bold, and tracking-wider
               <a key={link.label} href={link.href} className="px-3 py-2 text-sm font-nav font-bold tracking-wider uppercase text-brand-gold hover:text-brand-orange transition-colors">
                 {link.label}
               </a>
