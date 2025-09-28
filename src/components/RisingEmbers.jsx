@@ -2,20 +2,19 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const Particle = ({ isSmoke }) => {
-  const size = isSmoke ? Math.random() * 40 + 20 : Math.random() * 6 + 2; // Smoke width
-  const height = isSmoke ? size * 2.5 : size; // Smoke is taller than it is wide
+  const size = isSmoke ? Math.random() * 40 + 20 : Math.random() * 6 + 2;
+  const height = isSmoke ? size * 2.5 : size;
   const delay = Math.random() * 10;
   const duration = Math.random() * 12 + 12;
   const xStart = Math.random() * 100;
 
   if (isSmoke) {
-    // This is our new, streaky smoke particle
     return (
       <motion.div
         className="absolute bottom-0"
         style={{
           width: size,
-          height: height, // Using the new taller height
+          height: height,
           left: `${xStart}%`,
           background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)',
           filter: 'blur(5px)',
@@ -25,12 +24,11 @@ const Particle = ({ isSmoke }) => {
           y: '-100vh',
           opacity: [0, 0.3, 0], 
           scale: [1, 1.25, 1.5],
-          // This animates the shape to make it billow and streak
           borderRadius: [
             "50% 50% 30% 70% / 50% 50% 70% 30%",
             "30% 70% 50% 50% / 70% 30% 50% 50%",
             "50% 50% 60% 40% / 40% 60% 50% 50%",
-            "50% 50% 30% 70% / 50% 50% 70% 30%", // Loop back to the start
+            "50% 50% 30% 70% / 50% 50% 70% 30%",
           ]
         }}
         transition={{
@@ -44,7 +42,6 @@ const Particle = ({ isSmoke }) => {
     );
   }
 
-  // This is the same ember particle as before
   return (
     <motion.div
       className="absolute bottom-0 bg-brand-orange rounded-full"
@@ -68,12 +65,13 @@ const Particle = ({ isSmoke }) => {
 };
 
 const RisingEmbers = () => {
-  const particles = Array.from({ length: 40 }); // 25 embers, 15 smoke puffs
+  // UPDATED: Reduced the number of particles from 40 to 25 for better performance
+  const particles = Array.from({ length: 25 }); // 15 embers, 10 smoke puffs
 
   return (
     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
       {particles.map((_, i) => (
-        <Particle key={i} isSmoke={i > 25} />
+        <Particle key={i} isSmoke={i > 15} />
       ))}
     </div>
   );
