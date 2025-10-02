@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
 /* Pixelated text effect for headers */
 .pixel-text {
   text-shadow: 
@@ -64,3 +70,4 @@ html {
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
 }
+
