@@ -109,20 +109,6 @@ const FAQs = () => {
         </div>
       </FadeIn>
 
-      <motion.img
-        src={flamesImage}
-        alt="A line of flames"
-        className="absolute bottom-0 left-0 w-full h-42 object-cover z-10 pointer-events-none"
-        animate={{
-          opacity: [0.9, 1, 0.95, 1, 0.9],
-          scale: [1, 1.01, 1],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
     </section>
   );
 };
