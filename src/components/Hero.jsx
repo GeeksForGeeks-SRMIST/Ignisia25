@@ -5,7 +5,7 @@ import FadeIn from './FadeIn'; // REQUIRED dependency
 import CountdownTimer from './CountdownTimer'; // REQUIRED dependency
 
 // IMPORTANT: Assuming this image file exists in the specified path.
-import IgnisiaImage from '../assets/ignisia.png'; 
+import IgnisiaImage from '../assets/Ignisia.png'; 
 
 const Hero = () => {
   const eventDetails = [
