@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { CupSoda, Pizza, Code, Zap, Award } from 'lucide-react';
 
 // NEW LOGO IMPORTS (Assumed to be in src/assets/)
-import RedBullLogo from '../assets/Redbull.png';
+import RedBullLogo from '../assets/redbull.png';
 import DominosLogo from '../assets/Dominos.png';
 import UnstopLogo from '../assets/Unstop.png';
 import GFGLogo from '../assets/GFG.png'; 
