@@ -19,9 +19,8 @@ const SponsorsSection = () => {
         "Unleash your inner coder! Red Bull provides the ultimate energy boost to keep your mind sharp through every challenge and coding round.",
       logo: RedBullLogo,
       icon: CupSoda,
-      // --- UPDATED: Creamy white background ---
       themeColor: "bg-white/90",
-      glowColor: "shadow-red-500/30", // Softer glow for white background
+      glowColor: "shadow-red-500/30",
     },
     {
       category: "Food Partner",
@@ -30,9 +29,8 @@ const SponsorsSection = () => {
         "Fuel up for the coding battle! Enjoy delicious pizza/burger meals and vouchers to keep your energy high and your focus sharp during the event.",
       logo: DominosLogo,
       icon: Pizza,
-      // --- UPDATED: Creamy white background ---
       themeColor: "bg-white/90",
-      glowColor: "shadow-gray-300/30", // Softer glow for white background
+      glowColor: "shadow-gray-300/30",
     },
     {
       category: "Hosting Partner",
@@ -52,7 +50,7 @@ const SponsorsSection = () => {
       logo: GFGLogo,
       icon: Award,
       themeColor: "bg-green-700/50",
-      glowColor: "shadow-brand-orange/30",
+      glowColor: "shadow-green-500/30",
     },
   ];
 

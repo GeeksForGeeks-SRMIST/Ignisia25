@@ -47,21 +47,19 @@ const Footer = () => {
     <footer className="w-full flex justify-center p-4 sm:p-6 md:p-8 mt-12">
       <FadeIn direction="up" delay={0.2} className="w-full max-w-7xl">
         <div
-          className="w-full bg-black/ ৫০ backdrop-blur-lg border border-brand-glow/50 rounded-3xl p-8 md:p-12
-                       shadow-inner-glow"
+          className="w-full bg-black/50 backdrop-blur-lg border border-brand-glow/50 rounded-3xl p-8 md:p-12
+                     shadow-inner-glow"
         >
-          {/* Using responsive columns for better layout on mobile/tablet */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8 text-left">
-            {/* Column 1: Branding & Contact (Left-aligned & spans full-width on sm screens) */}
-            <div className="sm:col-span-2 md:col-span-1 flex flex-col items-start">
+          {/* Main grid with updated responsive breakpoints */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-8 text-left">
+            {/* Column 1: Branding - Spans full width on sm/md, 1 col on lg */}
+            <div className="sm:col-span-2 lg:col-span-1 flex flex-col items-start">
               <h3 className="text-3xl font-bold font-pixel text-brand-orange mb-3">
                 IGNISIA
               </h3>
               <p className="font-nav text-sm text-gray-400">
                 The flagship tech workshop at SRMIST.
               </p>
-
-              {/* Social Icons for GfG event accounts */}
               <div className="flex space-x-3 mt-4">
                 {[
                   {
@@ -92,7 +90,7 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Column 2: Quick Links (Left-aligned) */}
+            {/* Column 2: Quick Links */}
             <div className="flex flex-col items-start">
               <h4 className="font-bold font-pixel uppercase tracking-wider text-brand-gold mb-4">
                 Quick Links
@@ -111,23 +109,18 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Column 3: Our Speaker (Left-aligned) */}
+            {/* Column 3: Our Speaker */}
             <div className="flex flex-col items-start">
               <h4 className="font-bold font-pixel uppercase tracking-wider text-brand-gold mb-4">
                 Our Speaker
               </h4>
-
               <h5 className="font-bold text-white text-lg mb-1">
                 {speakerName}
               </h5>
               <p className="text-sm text-brand-orange mb-3">{speakerTitle}</p>
-
-              {/* Description */}
               <p className="text-xs text-gray-400 mb-4 max-w-xs">
                 {speakerDescription}
               </p>
-
-              {/* Speaker Socials */}
               <div className="flex space-x-3">
                 {speakerSocials.map((link) => {
                   const Icon = link.icon;
@@ -147,17 +140,17 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Column 4: Our Partners (Left-aligned on mobile, right-aligned on desktop) */}
-            <div className="flex flex-col items-start md:items-end">
+            {/* Column 4: Our Partners - Right-aligned only on large screens */}
+            <div className="flex flex-col items-start lg:items-end">
               <h4 className="font-bold font-pixel uppercase tracking-wider text-brand-gold mb-4">
                 Our Partners
               </h4>
-              <ul className="space-y-2 md:text-right">
+              <ul className="space-y-2 lg:text-right">
                 {partnersList.map((item) => {
                   return (
                     <li
                       key={item.name}
-                      className="flex items-center md:justify-end"
+                      className="flex items-center lg:justify-end"
                     >
                       <span className="font-nav text-sm text-white hover:text-brand-orange transition-colors duration-200">
                         {item.name}

@@ -15,12 +15,10 @@ import {
   GraduationCap,
 } from "lucide-react";
 
-// IMPORTANT: Importing Anu.png directly for the speaker image
 import AnuImage from "../assets/Anu.webp";
 
 const SpeakerSection = () => {
   const socialData = [
-    // Updated social data for the highlights section (not the new link bar)
     {
       name: "Instagram",
       followers: "80K+",
@@ -41,7 +39,6 @@ const SpeakerSection = () => {
     },
   ];
 
-  // NEW: Dedicated Social Link Data for the bar below the profile
   const socialLinksBar = [
     {
       platform: "YouTube",

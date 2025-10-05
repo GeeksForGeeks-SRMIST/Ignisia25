@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import Button from "./Button"; // Import the reusable Button component
+import Button from "./Button";
 
 // Import logos
 import GfgLogo from "../assets/gfg-logo.webp";
 import GfgTextLogo from "../assets/geeksforgeeks.webp";
+
+const UNSTOP_REGISTRATION_URL = "YOUR_UNSTOP_URL_HERE";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,10 +62,11 @@ const Navbar = () => {
               />
             </motion.div>
           </a>
+          {/* Text Logo is now hidden on tablet (md) screens to save space */}
           <motion.div
             variants={contentAnimation}
             animate={isScrolled ? "hidden" : "visible"}
-            className="overflow-hidden whitespace-nowrap"
+            className="overflow-hidden whitespace-nowrap hidden md:hidden lg:inline-block"
           >
             <img
               src={GfgTextLogo}
@@ -77,14 +80,14 @@ const Navbar = () => {
         <motion.div
           variants={contentAnimation}
           animate={isScrolled ? "hidden" : "visible"}
-          className="hidden md:flex items-center gap-2 overflow-hidden"
+          className="hidden md:flex items-center gap-1 lg:gap-2 overflow-hidden" // Reduced gap on md
         >
           <div className="w-px h-6 bg-white/10" />
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="px-3 py-2 text-sm font-nav font-bold tracking-wider uppercase text-brand-gold hover:text-brand-orange transition-colors"
+              className="px-2 lg:px-3 py-2 text-xs lg:text-sm font-nav font-bold tracking-wider uppercase text-brand-gold hover:text-brand-orange transition-colors"
             >
               {link.label}
             </a>
@@ -92,9 +95,14 @@ const Navbar = () => {
         </motion.div>
 
         {/* Right Side: Register Button */}
-        <div className="flex items-center ml-4">
-          <Button href="#register" size="small" font="nav">
-            Register Now...
+        <div className="flex items-center ml-2 lg:ml-4">
+          <Button
+            href={UNSTOP_REGISTRATION_URL}
+            target="_blank"
+            size="small"
+            font="nav"
+          >
+            Register Now
           </Button>
         </div>
       </motion.div>
