@@ -1,27 +1,60 @@
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Footer from './components/Footer'
-import Aboutus from './components/Aboutus'
-import Timeline from './components/Timeline'
-import FAQs from './components/FAQs'
-import SpeakerSection from './components/SpeakerSection'
-import SponsorsSection from './components/SponsorsSection' // NEW IMPORT
+import { useState, useEffect, lazy, Suspense } from "react";
+import { AnimatePresence } from "framer-motion";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Popup from "./components/Popup";
+
+// Lazy-load components that are below the fold
+const Aboutus = lazy(() => import("./components/Aboutus"));
+const SpeakerSection = lazy(() => import("./components/SpeakerSection"));
+const Timeline = lazy(() => import("./components/Timeline"));
+const SponsorsSection = lazy(() => import("./components/SponsorsSection"));
+const FAQs = lazy(() => import("./components/FAQs"));
+const Footer = lazy(() => import("./components/Footer"));
 
 function App() {
+  const [isPopupOpen, setIsPopupOpen] = useState(true);
+  const [heroKey, setHeroKey] = useState(1);
+
+  useEffect(() => {
+    if (isPopupOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isPopupOpen]);
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+    setHeroKey((prevKey) => prevKey + 1);
+  };
+
   return (
     <>
-      <Navbar />
-      <main>
-        <Hero />
-        <Aboutus />
-        <SpeakerSection />
-        <SponsorsSection /> {/* NEW SECTION ADDED HERE */}
-        <Timeline />
-        <FAQs />
-      </main>
-      <Footer />
+      <AnimatePresence>
+        {isPopupOpen && <Popup onClose={handleClosePopup} />}
+      </AnimatePresence>
+
+      <header>
+        <Navbar />
+      </header>
+
+      <Suspense fallback={null}>
+        <main>
+          <Hero key={heroKey} />
+          <Aboutus />
+          <SpeakerSection />
+          <Timeline />
+          <SponsorsSection />
+          <FAQs />
+        </main>
+        <Footer />
+      </Suspense>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

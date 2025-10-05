@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 
-const TARGET_DATE = new Date('October 13, 2025 09:00:00 GMT+0530').getTime(); // Event start time (IST)
+const TARGET_DATE = new Date("October 13, 2025 09:00:00 GMT+0530").getTime(); // Event start time (IST)
 
 const CountdownTimer = () => {
   const [time, setTime] = useState(0);
@@ -21,14 +22,28 @@ const CountdownTimer = () => {
 
   const getTimerElements = (ms) => {
     if (ms <= 0) {
-      return { days: '00', hours: '00', minutes: '00', seconds: '00', ended: true };
+      return {
+        days: "00",
+        hours: "00",
+        minutes: "00",
+        seconds: "00",
+        ended: true,
+      };
     }
 
     const totalSeconds = Math.floor(ms / 1000);
-    const days = String(Math.floor(totalSeconds / (3600 * 24))).padStart(2, '0');
-    const hours = String(Math.floor((totalSeconds % (3600 * 24)) / 3600)).padStart(2, '0');
-    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-    const seconds = String(Math.floor(totalSeconds % 60)).padStart(2, '0');
+    const days = String(Math.floor(totalSeconds / (3600 * 24))).padStart(
+      2,
+      "0"
+    );
+    const hours = String(
+      Math.floor((totalSeconds % (3600 * 24)) / 3600)
+    ).padStart(2, "0");
+    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
+      2,
+      "0"
+    );
+    const seconds = String(Math.floor(totalSeconds % 60)).padStart(2, "0");
 
     return { days, hours, minutes, seconds, ended: false };
   };
@@ -36,13 +51,19 @@ const CountdownTimer = () => {
   const timer = getTimerElements(time);
 
   if (timer.ended) {
-    return <div className="text-2xl font-nav text-brand-gold">IGNISIA 2025 is LIVE!</div>;
+    return (
+      <div className="text-2xl font-nav text-brand-gold">
+        IGNISIA 2025 is LIVE!
+      </div>
+    );
   }
 
   const TimeSegment = ({ value, label }) => (
-    <div className="flex flex-col items-center p-4 bg-black/50 backdrop-blur-md rounded-xl border border-brand-orange/50">
+    // UPDATED: Padding is now responsive
+    <div className="flex flex-col items-center p-2 sm:p-4 bg-black/50 backdrop-blur-md rounded-xl border border-brand-orange/50">
       <motion.div
-        className="text-4xl md:text-6xl font-pixel text-brand-gold"
+        // UPDATED: Font size is now responsive
+        className="text-4xl sm:text-4xl md:text-6xl font-pixel text-brand-gold"
         key={value}
         initial={{ y: -10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -50,7 +71,10 @@ const CountdownTimer = () => {
       >
         {value}
       </motion.div>
-      <span className="text-sm font-nav uppercase tracking-widest mt-1 text-gray-400">{label}</span>
+      {/* UPDATED: Label text size is now responsive */}
+      <span className="text-xs sm:text-sm font-nav uppercase tracking-widest mt-1 text-gray-400">
+        {label}
+      </span>
     </div>
   );
 
