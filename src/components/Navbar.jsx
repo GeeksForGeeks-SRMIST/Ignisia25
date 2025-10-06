@@ -7,7 +7,7 @@ import Button from "./Button";
 import GfgLogo from "../assets/gfg-logo.webp";
 import GfgTextLogo from "../assets/geeksforgeeks.webp";
 
-const UNSTOP_REGISTRATION_URL = "YOUR_UNSTOP_URL_HERE";
+const UNSTOP_REGISTRATION_URL = "https://unstop.com/o/wA7Zij8";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

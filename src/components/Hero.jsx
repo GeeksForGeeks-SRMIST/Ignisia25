@@ -91,7 +91,12 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Button href="#register" variant="primary">
+            <Button
+              href="https://unstop.com/o/wA7Zij8"
+              target="_blank"
+              variant="primary"
+              font="pixel"
+            >
               Register Now!
             </Button>
             <Button href="#about" variant="secondary">

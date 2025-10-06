@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { CupSoda, Pizza, Code, Zap, Award } from "lucide-react";
 
 // NEW LOGO IMPORTS (Assumed to be in src/assets/)
-import RedBullLogo from "../assets/redbull.webp";
-import DominosLogo from "../assets/Dominos.webp";
+import CocaColaLogo from "../assets/cocacola.webp";
+import BurgerKingLogo from "../assets/burgerking.webp";
 import UnstopLogo from "../assets/Unstop.webp";
 import GFGLogo from "../assets/GFG.webp";
 
@@ -14,23 +14,23 @@ const SponsorsSection = () => {
   const sponsors = [
     {
       category: "Beverage Partner",
-      title: "Red Bull",
+      title: "CocaCola",
       description:
-        "Unleash your inner coder! Red Bull provides the ultimate energy boost to keep your mind sharp through every challenge and coding round.",
-      logo: RedBullLogo,
+        "Unleash your inner coder! CocaCola provides the ultimate energy boost to keep your mind sharp through every challenge and coding round.",
+      logo: CocaColaLogo,
       icon: CupSoda,
       themeColor: "bg-white/90",
       glowColor: "shadow-red-500/30",
     },
     {
       category: "Food Partner",
-      title: "Domino's",
+      title: "Burger King",
       description:
         "Fuel up for the coding battle! Enjoy delicious pizza/burger meals and vouchers to keep your energy high and your focus sharp during the event.",
-      logo: DominosLogo,
+      logo: BurgerKingLogo,
       icon: Pizza,
       themeColor: "bg-white/90",
-      glowColor: "shadow-gray-300/30",
+      glowColor: "shadow-brand-orange/30",
     },
     {
       category: "Hosting Partner",

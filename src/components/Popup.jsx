@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import Button from "./Button";
 
-// const UNSTOP_REGISTRATION_URL = " ";
+const UNSTOP_REGISTRATION_URL = "https://unstop.com/o/wA7Zij8";
 
 const Popup = ({ onClose }) => {
   const dropIn = {
@@ -50,7 +50,7 @@ const Popup = ({ onClose }) => {
             start building it with the experts.
           </p>
           <Button
-            // href={UNSTOP_REGISTRATION_URL}
+            href={UNSTOP_REGISTRATION_URL}
             target="_blank"
             size="large"
             font="pixel"

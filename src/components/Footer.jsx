@@ -1,47 +1,38 @@
 import React from "react";
 import FadeIn from "./FadeIn";
-import { Youtube, Instagram, Linkedin } from "lucide-react";
+import { Youtube, Instagram, Linkedin, Globe } from "lucide-react";
 // eslint-disable-next-line no-unused-vars
 import gfgLogo from "../assets/gfglogo.webp";
 
 const Footer = () => {
-  const speakerSocials = [
-    {
-      href: "https://www.instagram.com/its.anu.sharma/",
-      icon: Instagram,
-      label: "Instagram",
-    },
-    {
-      href: "https://www.linkedin.com/in/anu-sharma-2002/",
-      icon: Linkedin,
-      label: "LinkedIn",
-    },
-    {
-      href: "https://www.youtube.com/@AnuSharma02",
-      icon: Youtube,
-      label: "YouTube",
-    },
-  ];
-
   const footerNavLinks = [
     { href: "#home", label: "Home" },
     { href: "#about", label: "About IGNISIA" },
-    { href: "#speaker", label: "Our Guest" },
+    { href: "#speaker", label: "Our Guests" },
     { href: "#timeline", label: "Timeline" },
     { href: "#faqs", label: "FAQs" },
   ];
 
   const partnersList = [
-    { name: "GeeksforGeeks" },
-    { name: "Unstop" },
-    { name: "Red Bull" },
-    { name: "Domino's" },
+    { href: "https://www.geeksforgeeks.org/", name: "GeeksforGeeks" },
+    { href: "https://unstop.com/", name: "Unstop" },
+    { href: "https://www.coca-colacompany.com/", name: "CocaCola" },
+    {
+      href: "https://www.bk.com/",
+      name: "Burger King",
+    },
   ];
 
-  const speakerName = "Anu Sharma";
-  const speakerTitle = "SWE @ Google, TEDx Speaker";
-  const speakerDescription =
-    "Internationally recognized SWE @ Google and TEDx speaker, Anu guides 500+ professionals in DSA for placement readiness.";
+  const speakers = [
+    {
+      name: "Paras Atal",
+      title: "SDE @ BNY | Content Creator",
+    },
+    {
+      name: "Kanupriya Johari",
+      title: "SDE @ BNY | Google WE Scholar",
+    },
+  ];
 
   return (
     <footer className="w-full flex justify-center p-4 sm:p-6 md:p-8 mt-12">
@@ -50,9 +41,8 @@ const Footer = () => {
           className="w-full bg-black/50 backdrop-blur-lg border border-brand-glow/50 rounded-3xl p-8 md:p-12
                      shadow-inner-glow"
         >
-          {/* Main grid with updated responsive breakpoints */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-8 text-left">
-            {/* Column 1: Branding - Spans full width on sm/md, 1 col on lg */}
+            {/* Column 1: Branding */}
             <div className="sm:col-span-2 lg:col-span-1 flex flex-col items-start">
               <h3 className="text-3xl font-bold font-pixel text-brand-orange mb-3">
                 IGNISIA
@@ -72,6 +62,11 @@ const Footer = () => {
                     icon: Linkedin,
                     label: "GfG LinkedIn",
                   },
+                  {
+                    href: "https://gfgsrm-website.vercel.app",
+                    icon: Globe,
+                    label: "GfG SRMIST Website",
+                  },
                 ].map((link, index) => {
                   const Icon = link.icon;
                   return (
@@ -80,10 +75,10 @@ const Footer = () => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-full bg-brand-dark hover:bg-brand-orange/20 text-brand-gold hover:text-brand-orange transition-all duration-200"
+                      className="p-2 rounded-full bg-brand-dark hover:bg-brand-gold/20 text-brand-gold hover:text-brand-orange transition-all duration-200 group"
                       aria-label={link.label}
                     >
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
                     </a>
                   );
                 })}
@@ -109,55 +104,44 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Column 3: Our Speaker */}
+            {/* Column 3: Our Speakers (Updated) */}
             <div className="flex flex-col items-start">
               <h4 className="font-bold font-pixel uppercase tracking-wider text-brand-gold mb-4">
-                Our Speaker
+                Our Speakers
               </h4>
-              <h5 className="font-bold text-white text-lg mb-1">
-                {speakerName}
-              </h5>
-              <p className="text-sm text-brand-orange mb-3">{speakerTitle}</p>
-              <p className="text-xs text-gray-400 mb-4 max-w-xs">
-                {speakerDescription}
-              </p>
-              <div className="flex space-x-3">
-                {speakerSocials.map((link) => {
-                  const Icon = link.icon;
-                  return (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-full bg-brand-dark hover:bg-brand-gold/20 text-brand-gold hover:text-brand-orange transition-all duration-200 group"
-                      aria-label={`Speaker ${link.label}`}
-                    >
-                      <Icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                    </a>
-                  );
-                })}
+              <div className="space-y-4">
+                {speakers.map((speaker) => (
+                  <div key={speaker.name}>
+                    <h5 className="font-bold text-white text-lg mb-1">
+                      {speaker.name}
+                    </h5>
+                    <p className="text-sm text-brand-orange">{speaker.title}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Column 4: Our Partners - Right-aligned only on large screens */}
+            {/* Column 4: Our Partners */}
             <div className="flex flex-col items-start lg:items-end">
               <h4 className="font-bold font-pixel uppercase tracking-wider text-brand-gold mb-4">
                 Our Partners
               </h4>
               <ul className="space-y-2 lg:text-right">
-                {partnersList.map((item) => {
-                  return (
-                    <li
-                      key={item.name}
-                      className="flex items-center lg:justify-end"
+                {partnersList.map((item) => (
+                  <li
+                    key={item.name}
+                    className="flex items-center lg:justify-end"
+                  >
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-nav text-sm text-white hover:text-brand-orange transition-colors duration-200"
                     >
-                      <span className="font-nav text-sm text-white hover:text-brand-orange transition-colors duration-200">
-                        {item.name}
-                      </span>
-                    </li>
-                  );
-                })}
+                      {item.name}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
