@@ -89,7 +89,7 @@ const FAQs = () => {
       <FadeIn className="relative z-20">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-[clamp(2.25rem,5vw,3rem)] font-bold font-pixel text-brand-gold mb-6 leading-relaxed">
+            <h2 className="text-[clamp(2.25rem,5vw,3rem)] font-bold font-pixel text-brand-gold mb-6 leading-relaxed break-words">
               Frequently Asked Questions
             </h2>
             <div className="w-24 h-1 bg-brand-gold mx-auto mb-8"></div>

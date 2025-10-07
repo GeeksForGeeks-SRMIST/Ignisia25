@@ -101,7 +101,7 @@ const SponsorsSection = () => {
     <section id="sponsors" className="relative py-24 bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-[clamp(2.25rem,5vw,3rem)] font-bold font-pixel text-brand-gold mb-6">
+          <h2 className="text-[clamp(2.25rem,5vw,3rem)] font-bold font-pixel text-brand-gold mb-6 break-words">
             Our Esteemed Partners
           </h2>
           <div className="w-24 h-1 bg-brand-gold mx-auto mb-12"></div>

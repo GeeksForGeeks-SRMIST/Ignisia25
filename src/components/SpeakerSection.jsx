@@ -53,7 +53,7 @@ const speakers = [
     name: "Kanupriya Johari",
     title: "SDE @ BNY | Google WE Scholar",
     image: KanupriyaJohariImage,
-    bio: "A skilled Software Developer and a Google WE Scholar, passionate about technology and with extensive experience from top internships.",
+    bio: "A Software Developer and a Google WE Scholar, passionate about technology and with extensive experience from top internships.",
     socials: [
       {
         platform: "LinkedIn",
@@ -152,7 +152,7 @@ const SpeakerSection = () => {
     <section id="speaker" className="relative py-24 bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-20">
-          <h2 className="text-[clamp(2.25rem,5vw,3rem)] font-bold font-pixel text-brand-gold mb-6">
+          <h2 className="text-[clamp(2.25rem,5vw,3rem)] font-bold font-pixel text-brand-gold mb-6 break-words">
             Meet Our Guests
           </h2>
           <div className="w-24 h-1 bg-brand-gold mx-auto mb-8"></div>
