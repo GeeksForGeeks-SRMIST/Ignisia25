@@ -1,213 +1,158 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Clock, CheckCircle, Circle, Calendar, MapPin } from 'lucide-react';
+import React from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { ClipboardList, Laptop, Pizza, Award, MapPin } from "lucide-react";
 
 const timelineEvents = [
   {
     time: "8:00 AM",
-    title: "Physical Registrations Start",
-    description: "Welcome participants and distribute event materials",
-    completed: true,
-    location: "Main Entrance"
+    title: "Physical Registrations & Check-in",
+    description:
+      "Welcome! Grab your event kit and get set for an exciting day.",
+    location: "Main Entrance",
+    icon: ClipboardList,
   },
   {
-    time: "9:00 AM", 
-    title: "IGNISIA Workshop Starts",
-    description: "Interactive coding sessions and technical workshops begin",
-    completed: true,
-    location: "Workshop Hall"
+    time: "9:00 AM",
+    title: "Workshop: Session I",
+    description: "Deep dive into core DSA concepts and placement strategies.",
+    location: "GN Ramachandran Hall",
+    icon: Laptop,
   },
   {
     time: "1:00 PM",
-    title: "Lunch Break",
-    description: "Networking lunch with fellow developers and mentors",
-    completed: true,
-    location: "Cafeteria"
+    title: "Networking Lunch",
+    description: "Recharge with complimentary lunch and connect with peers.",
+    location: "Cafeteria",
+    icon: Pizza,
   },
   {
     time: "2:00 PM",
-    title: "Event Continues/Resumes",
-    description: "Advanced sessions and project presentations",
-    completed: false,
-    location: "Main Auditorium"
+    title: "Workshop: Session II",
+    description: "Advanced problem-solving sessions and competitive rounds.",
+    location: "GN Ramachandran Hall",
+    icon: Laptop,
   },
   {
     time: "5:00 PM",
-    title: "Events End & Vote Of Thanks",
-    description: "Closing ceremony and appreciation for all participants",
-    completed: false,
-    location: "Main Stage"
-  }
+    title: "Closing Ceremony",
+    description: "Vote of thanks, and final wrap-up.",
+    location: "Main Stage",
+    icon: Award,
+  },
 ];
 
-const Timeline = () => {
-  const [visibleItems, setVisibleItems] = useState(new Set());
-  const [activeItem, setActiveItem] = useState(null);
-  const observerRefs = useRef([]);
-
-  useEffect(() => {
-    const observers = [];
-
-    observerRefs.current.forEach((ref, index) => {
-      if (ref) {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              setVisibleItems(prev => new Set([...prev, index]));
-            }
-          },
-          { threshold: 0.3 }
-        );
-        observer.observe(ref);
-        observers.push(observer);
-      }
-    });
-
-    return () => {
-      observers.forEach(observer => observer.disconnect());
-    };
-  }, []);
+// --- SOLUTION: Extracted repeating logic into its own component ---
+const TimelineEvent = ({ event, index }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const isLeft = index % 2 !== 0;
 
   return (
-    // FIX: Added id="timeline" to the main wrapper for navigation links to target
-    <div id="timeline" className="min-h-screen bg-black relative overflow-hidden">
-      
-      {/* The heavy animated background remains removed for performance. */}
+    <motion.div
+      key={index}
+      ref={ref}
+      className="mb-12"
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="flex items-center lg:justify-center relative">
+        <motion.div
+          className={`absolute w-8 h-8 rounded-full border-4 border-orange-500 bg-black flex items-center justify-center z-10
+            ${
+              isLeft
+                ? "left-4 lg:left-[calc(50%-2.2rem)]"
+                : "left-4 lg:left-[calc(50%+0.165rem)]"
+            }`}
+          variants={{
+            hidden: { scale: 0 },
+            visible: {
+              scale: 1,
+              transition: { duration: 0.5, delay: 0.2 },
+            },
+          }}
+        >
+          <div
+            className={`w-4 h-4 rounded-full bg-yellow-500 transition-all duration-300 ${
+              isInView ? "animate-pulse" : ""
+            }`}
+          ></div>
+        </motion.div>
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
-        {/* Header with Pixelated Style */}
-        <div className="text-center mb-20">
-          <div className="inline-block relative">
-            <h1 
-              // Matched header style to About section
-              className="text-5xl md:text-6xl font-bold font-pixel text-brand-gold mb-6 tracking-wider"
-            >
-              EVENT TIMELINE
-            </h1>
+        {/* Timeline Card */}
+        <motion.div
+          className={`w-full pl-12 lg:pl-0 lg:w-5/12 ${
+            isLeft ? "lg:mr-[46%] lg:pr-8" : "lg:ml-[46%] lg:pl-8"
+          }`}
+          variants={{
+            hidden: { opacity: 0, x: isLeft ? -50 : 50 },
+            visible: {
+              opacity: 1,
+              x: 0,
+              transition: { duration: 0.6, delay: 0.4 },
+            },
+          }}
+        >
+          <div className="p-6 bg-black/40 backdrop-blur-md border border-orange-500/20 rounded-xl shadow-lg relative group overflow-hidden">
+            <div className="absolute -inset-px bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl opacity-0 group-hover:opacity-25 transition-opacity duration-300 blur-md -z-10" />
+
+            <div className="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-orange-500/10 to-transparent rounded-br-full opacity-200"></div>
+            <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-yellow-500/10 to-transparent rounded-tl-full opacity-200"></div>
+
+            <div className="flex items-start gap-4 relative z-10">
+              <div className="p-3 bg-orange-500/20 rounded-lg text-orange-500 mt-1">
+                <event.icon className="w-5 h-5" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-bold text-orange-500">
+                  {event.time}
+                </p>
+                <h3 className="text-lg font-bold text-white mt-1">
+                  {event.title}
+                </h3>
+                <p className="text-gray-400 mt-2 text-sm leading-relaxed">
+                  {event.description}
+                </p>
+                <div className="flex items-center gap-2 mt-3 text-orange-500">
+                  <MapPin size={14} />
+                  <span className="text-xs font-medium">{event.location}</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <p 
-            className="text-gray-400 text-lg md:text-xl font-medium tracking-wide"
-          >
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+const Timeline = () => {
+  return (
+    <section id="timeline" className="bg-black text-white py-24 px-4">
+      <div className="container mx-auto">
+        <div className="text-center mb-20">
+          <h2 className="text-[clamp(2.25rem,5vw,3rem)] font-bold font-pixel text-brand-gold mb-6 tracking-wider">
+            Event Timeline
+          </h2>
+          <div className="w-24 h-1 bg-brand-gold mx-auto mb-8"></div>
+          <p className="text-gray-400 text-lg md:text-xl font-medium tracking-wide">
             Journey through IGNISIA'25 Schedule
           </p>
         </div>
 
-        {/* Unique Timeline Design */}
-        <div className="max-w-6xl mx-auto">
-          <div className="relative">
-            {/* Central Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-orange-400 via-amber-500 to-orange-600 rounded-full shadow-lg shadow-orange-500/30"></div>
-            
-            {/* COMPACT FIX 1: Reduced vertical spacing between cards */}
-            <div className="space-y-8">
-            {timelineEvents.map((event, index) => (
-              <div
-                key={index}
-                ref={el => observerRefs.current[index] = el}
-                className={`relative transition-all duration-1000 transform ${
-                  visibleItems.has(index) 
-                    ? 'translate-y-0 opacity-100' 
-                    : 'translate-y-20 opacity-0'
-                }`}
-                style={{ transitionDelay: `${index * 200}ms` }} 
-                onMouseEnter={() => setActiveItem(index)}
-                onMouseLeave={() => setActiveItem(null)}
-              >
-                {/* Timeline Node */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 z-20">
-                  <div className={`w-6 h-6 rounded-full bg-gradient-to-r from-orange-400 to-amber-500 border-4 border-black shadow-lg shadow-orange-500/30 transition-all duration-500 ${
-                    activeItem === index ? 'scale-150 shadow-orange-500/60' : ''
-                  }`}></div>
-                </div>
+        <div className="relative max-w-lg md:max-w-3xl lg:max-w-4xl mx-auto">
+          {/* The main timeline bar - visible on all screens */}
+          <div className="absolute top-0 h-full w-1 bg-gradient-to-b from-orange-500 to-yellow-500 left-4 lg:left-1/2 lg:-translate-x-1/2"></div>
 
-                {/* Event Card - Alternating Sides */}
-                {/* COMPACT FIX 3: Reduced horizontal padding for cards */}
-                <div className={`flex ${index % 2 === 0 ? 'justify-start pr-4 md:pr-8' : 'justify-end pl-4 md:pl-8'}`}>
-                  <div className={`relative group max-w-md w-full ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}>
-                    
-                    {/* Time Badge - Floating Above Card */}
-                    <div className={`absolute -top-4 ${index % 2 === 0 ? 'right-4' : 'left-4'} z-10`}>
-                      {/* FUNCTIONALITY FIX: Time badge is a div, removing hover effects to clarify it's a static label */}
-                      <div className={`backdrop-blur-xl bg-gradient-to-r from-brand-orange/90 to-brand-gold/90 border border-orange-300/50 rounded-full px-6 py-2 shadow-xl shadow-brand-orange/30 transition-all duration-500`}>
-                        <div className="flex items-center gap-2">
-                          <Clock className="w-4 h-4 text-white" />
-                          <span className="text-white font-bold text-sm tracking-wide">{event.time}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Main Event Card - Unique Geometric Design */}
-                    <div className={`relative overflow-hidden transition-all duration-700 ${
-                      activeItem === index ? 'scale-105' : ''
-                    }`}>
-                      
-                      {/* Card Background with Unique Shape */}
-                      <div className="relative">
-                        {/* Main Card Body */}
-                        <div className="backdrop-blur-2xl bg-black/40 border border-orange-400/20 rounded-3xl p-8 shadow-2xl shadow-orange-500/10">
-                          
-                          {/* Decorative Corner Elements (Toned down) */}
-                          <div className={`absolute top-0 ${index % 2 === 0 ? 'right-0' : 'left-0'} w-20 h-20 bg-gradient-to-br from-brand-orange/10 to-brand-gold/10 ${index % 2 === 0 ? 'rounded-bl-3xl' : 'rounded-br-3xl'} rounded-tr-3xl`}></div>
-                          <div className={`absolute bottom-0 ${index % 2 === 0 ? 'left-0' : 'right-0'} w-16 h-16 bg-gradient-to-tr from-orange-400/10 to-amber-400/10 ${index % 2 === 0 ? 'rounded-tr-3xl' : 'rounded-tl-3xl'} rounded-bl-3xl`}></div>
-                          
-                          {/* Content */}
-                          <div className="relative z-10">
-                            <div className="flex items-start gap-4 mb-4">
-                              <div className="p-3 rounded-2xl bg-gradient-to-br from-brand-orange/30 to-brand-gold/30 backdrop-blur-sm">
-                                <Calendar className="w-6 h-6 text-orange-300" />
-                              </div>
-                              <div className="flex-1">
-                                <h3 className="text-xl md:text-2xl font-bold text-white mb-2 leading-tight">
-                                  {event.title}
-                                </h3>
-                              </div>
-                            </div>
-                            
-                            <p className="text-gray-400 text-base leading-relaxed mb-4">
-                              {event.description}
-                            </p>
-                            
-                            {event.location && (
-                              <div className="flex items-center gap-2 text-orange-300/80">
-                                <MapPin className="w-4 h-4" />
-                                <span className="text-sm font-medium">{event.location}</span>
-                              </div>
-                            )}
-                          </div>
-                          
-                          {/* Animated Border Glow - Reduced opacity */}
-                          <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-500/10 to-amber-500/10 blur-sm -z-10 transition-opacity duration-500 ${
-                            activeItem === index ? 'opacity-100' : 'opacity-0'
-                          }`}></div>
-                        </div>
-                        
-                        {/* Connecting Line to Timeline (Remains the same) */}
-                        <div className={`absolute top-1/2 ${index % 2 === 0 ? '-right-8 md:-right-16' : '-left-8 md:-left-16'} w-8 md:w-16 h-0.5 bg-gradient-to-r from-orange-400 to-amber-500 transform -translate-y-1/2`}>
-                          <div className={`absolute inset-0 bg-gradient-to-r from-orange-300 to-amber-300 rounded-full transition-all duration-1000 ${
-                            visibleItems.has(index) ? 'scale-x-100' : 'scale-x-0'
-                          } ${index % 2 === 0 ? 'origin-left' : 'origin-right'}`}></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Call to Action with Glassmorphism */}
-        <div className="text-center mt-20">
-          <div className="inline-block relative">
-            {/* The main 'Register' button is interactive and links to the register section */}
-            <a href="#register" className="backdrop-blur-xl bg-gradient-to-r from-orange-500/30 to-amber-500/30 border border-orange-400/40 hover:border-orange-400/60 text-white font-bold py-4 px-12 rounded-full text-lg shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/50 transform hover:scale-105 transition-all duration-300 tracking-wide">
-              REGISTER FOR IGNISIA'25
-            </a>
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-amber-500/20 blur-xl rounded-full -z-10 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
-          </div>
+          {timelineEvents.map((event, index) => (
+            <TimelineEvent key={index} event={event} index={index} />
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
