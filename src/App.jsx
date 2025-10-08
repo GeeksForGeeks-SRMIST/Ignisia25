@@ -1,8 +1,10 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import { AnimatePresence } from "framer-motion";
+
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Popup from "./components/Popup";
+import FollowUs from "./components/FollowUs";
 
 // Lazy-load components that are below the fold
 const Aboutus = lazy(() => import("./components/Aboutus"));
@@ -50,6 +52,7 @@ function App() {
           <Timeline />
           <SponsorsSection />
           <FAQs />
+          <FollowUs />
         </main>
         <Footer />
       </Suspense>

@@ -56,7 +56,7 @@ const CountdownTimer = () => {
   const seconds = String(Math.floor(totalSeconds % 60)).padStart(2, "0");
 
   return (
-    <div className="flex justify-center gap-2 md:gap-4 lg:gap-8 mt-10">
+    <div className="flex flex-wrap justify-center gap-2 md:gap-4 lg:gap-8 mt-10">
       <TimeSegment value={days} label="Days" />
       <TimeSegment value={hours} label="Hours" />
       <TimeSegment value={minutes} label="Mins" />

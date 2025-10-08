@@ -134,7 +134,7 @@ const Timeline = () => {
     <section id="timeline" className="bg-black text-white py-24 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-20">
-          <h2 className="text-[clamp(2.25rem,5vw,3rem)] font-bold font-pixel text-brand-gold mb-6 tracking-wider">
+          <h2 className="text-[clamp(2.25rem,5vw,3rem)] font-bold font-pixel text-brand-gold mb-6 tracking-wider break-words">
             Event Timeline
           </h2>
           <div className="w-24 h-1 bg-brand-gold mx-auto mb-8"></div>
